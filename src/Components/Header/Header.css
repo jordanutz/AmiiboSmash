@@ -1,0 +1,14 @@
+header {
+  width: 100%;
+  height: 100px;
+  padding: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid black;
+}
+
+
+header img {
+  height: 100%;
+}

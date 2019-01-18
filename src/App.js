@@ -3,6 +3,8 @@ import './Reset.css'
 import axios from 'axios'
 import Header from './Components/Header/Header'
 import Selection from './Components/Selection/Selection'
+import Amiibo from './Components/Amiibo/Amiibo'
+import Profile from './Components/Profile/Profile'
 
 class App extends Component {
   constructor() {
@@ -14,34 +16,55 @@ class App extends Component {
 
   componentDidMount () {
     axios.get('http://www.amiiboapi.com/api/amiibo/').then(res => {
-      this.setState({
-        amiibo: res.data.amiibo
+      let finalAmiibo = this.filterAmiibo(res)
+      axios.post('/api/amiibos', {finalAmiibo}).then(res => {
+        console.log(res.data)
+        this.setState({
+          amiibo: res.data
+        })
       })
     })
   }
 
-  render() {
-
-    let displayedAmiibo = this.state.amiibo.filter( (element, index) => {
+  filterAmiibo = (res) => {
+    console.log(res.data.amiibo)
+    let filteredAmiibo = res.data.amiibo.filter( (element, index) => {
       return element.amiiboSeries === "Super Smash Bros."
       && element.gameSeries !== "Final Fantasy"
       && element.gameSeries !== 'Fire Emblem'
       && element.name !== "R.O.B. (NES)"
       && element.gameSeries !== "Mii"
-      && element.name !== "Bayonetta"
+      && element.name !== "Bayonetta (Player 2)"
       && element.name !== "Mega Man (Gold Edition)"
-      ;
-    }).map( element => {
-      return element
+      && element.name !== "R.O.B (Famicom)"
+      && element.name !== "Rosalina & Luma"
+      && element.name !== "Zero Suit Samus"
+      && element.name !== "Mr. Game & Watch"
+      && element.name !== "Meta Knight"
+      && element.name !== "King Dedede"
+    })
+    return filteredAmiibo
+  }
+
+  render() {
+
+    console.log(this.state.amiibo)
+
+    let displayedAmiibo = this.state.amiibo.map( (character, index) => {
+      console.log(character)
+      return <Amiibo key={character.tail} {...character}/>
     })
 
-    console.log(displayedAmiibo)
+
+
 
     return (
       <div className="App">
         <Header />
-        <Selection />
-
+        <div className="MainApp">
+          <Selection amiibo={displayedAmiibo}/>
+          <Profile />
+        </div>
       </div>
     );
   }

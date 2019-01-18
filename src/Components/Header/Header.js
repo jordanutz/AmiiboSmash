@@ -1,10 +1,12 @@
 import React from 'react'
+import'./Header.css'
+import AmiiboLogo from './AmiiboLogo.png'
 
 const Header = (props) => {
   return (
-    <div>
-      Header
-    </div>
+    <header>
+      <img src={AmiiboLogo} />
+    </header>
   )
 }
 

@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
+import './Selection.css'
 
 class Selection extends Component {
   render () {
     return (
-      <div>
-        Selection
-      </div>
+      <aside>
+        {this.props.amiibo}
+      </aside>
     )
   }
 }

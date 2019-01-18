@@ -1,0 +1,37 @@
+.Amiibo {
+  width: 120px;
+  height: 120px;
+  padding: .5rem;
+  margin: .10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid black;
+}
+
+.Amiibo img {
+  width: 4.5rem;
+  height: 5rem;
+  position: absolute;
+  top: 3px;
+}
+
+.Amiibo:hover {
+  background: blue;
+  color: white;
+}
+
+.Amiibo h1 {
+  position: absolute;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: .95rem;
+  font-family: 'Francois One', sans-serif;
+  color: black;
+  text-align: center;
+  margin-top: 5px;
+}

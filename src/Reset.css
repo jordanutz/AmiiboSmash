@@ -17,9 +17,13 @@ time, mark, audio, video {
 	font-size: 100%;
 	vertical-align: baseline;
   box-sizing: border-box;
-	font-family: 'Roboto', sans-serif;
 }
 
 .App {
 	min-height: 100vh;
+}
+
+.MainApp {
+	display: flex;
+	justify-content: space-evenly;
 }
