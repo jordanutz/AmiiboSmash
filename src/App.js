@@ -10,14 +10,15 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      amiibo: []
+      amiibo: [],
+      character: {}
     }
   }
 
   componentDidMount () {
     axios.get('http://www.amiiboapi.com/api/amiibo/').then(res => {
       let finalAmiibo = this.filterAmiibo(res)
-      axios.post('/api/amiibos', {finalAmiibo}).then(res => {
+      axios.post('/api/amiibo', {finalAmiibo}).then(res => {
         console.log(res.data)
         this.setState({
           amiibo: res.data
@@ -27,7 +28,7 @@ class App extends Component {
   }
 
   filterAmiibo = (res) => {
-    console.log(res.data.amiibo)
+    // console.log(res.data.amiibo)
     let filteredAmiibo = res.data.amiibo.filter( (element, index) => {
       return element.amiiboSeries === "Super Smash Bros."
       && element.gameSeries !== "Final Fantasy"
@@ -46,24 +47,26 @@ class App extends Component {
     return filteredAmiibo
   }
 
+  getCharacter = (id) => {
+    console.log(id)
+    axios.get(`/api/amiibo/${id}`).then(res => {
+      console.log(res.data)
+      this.setState({
+        character: res.data[0]
+      })
+    })
+  }
+
   render() {
 
-    console.log(this.state.amiibo)
-
-    let displayedAmiibo = this.state.amiibo.map( (character, index) => {
-      console.log(character)
-      return <Amiibo key={character.tail} {...character}/>
-    })
-
-
-
+    console.log(this.state.character)
 
     return (
       <div className="App">
         <Header />
         <div className="MainApp">
-          <Selection amiibo={displayedAmiibo}/>
-          <Profile />
+          <Selection amiibo={this.state.amiibo} getCharacter={this.getCharacter} />
+          <Profile character={this.state.character}/>
         </div>
       </div>
     );

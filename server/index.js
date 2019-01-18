@@ -6,7 +6,8 @@ const controller = require('./controller.js')
 const app = express()
 app.use(bodyParser.json())
 
-app.post('/api/amiibos', controller.filteredAmiibo)
+app.post('/api/amiibo', controller.filteredAmiibo)
+app.get('/api/amiibo/:id', controller.getAmiibo)
 
 PORT = 1993;
 app.listen(PORT, () => {
