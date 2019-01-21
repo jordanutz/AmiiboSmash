@@ -8,6 +8,8 @@ app.use(bodyParser.json())
 
 app.post('/api/amiibo', controller.filteredAmiibo)
 app.get('/api/amiibo/:id', controller.getAmiibo)
+app.post('/api/favorite', controller.favoriteAmiibo)
+app.delete('/api/favorite/:id', controller.deleteAmiibo)
 
 PORT = 1993;
 app.listen(PORT, () => {

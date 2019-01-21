@@ -1,0 +1,10 @@
+.SingleFavorite {
+  display: flex;
+  flex-direction: column;
+  background: blue;
+}
+
+.SingleFavorite img {
+  width: 5.5rem;
+  height: 6rem;
+}

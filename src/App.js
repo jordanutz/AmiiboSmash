@@ -5,13 +5,16 @@ import Header from './Components/Header/Header'
 import Selection from './Components/Selection/Selection'
 import Amiibo from './Components/Amiibo/Amiibo'
 import Profile from './Components/Profile/Profile'
+import Favorites from './Components/Favorites/Favorites'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       amiibo: [],
-      character: {}
+      character: {},
+      favorites: [],
+      filter: ''
     }
   }
 
@@ -38,11 +41,7 @@ class App extends Component {
       && element.name !== "Bayonetta (Player 2)"
       && element.name !== "Mega Man (Gold Edition)"
       && element.name !== "R.O.B (Famicom)"
-      && element.name !== "Rosalina & Luma"
-      && element.name !== "Zero Suit Samus"
-      && element.name !== "Mr. Game & Watch"
-      && element.name !== "Meta Knight"
-      && element.name !== "King Dedede"
+
     })
     return filteredAmiibo
   }
@@ -57,16 +56,48 @@ class App extends Component {
     })
   }
 
-  render() {
+  addFavorite = (favorite) => {
+    console.log(favorite)
+    axios.post('/api/favorite', favorite).then(res => {
+      // console.log(res.data)
+      this.setState({
+        favorites: res.data
+      })
+    })
+  }
 
-    console.log(this.state.character)
+  deleteFavorite = (id) => {
+    console.log(id)
+    axios.delete(`/api/favorite/${id}`).then(res => {
+      console.log(res)
+      this.setState({
+        favorites: res.data
+      })
+    })
+  }
+
+  handleSearchFilter = (event) => {
+    this.setState({
+      filter: event.target.value
+    })
+  }
+
+  render() {
+    //
+    // console.log(this.state.character)
+    // console.log(this.state.favorites)
+
 
     return (
       <div className="App">
         <Header />
         <div className="MainApp">
-          <Selection amiibo={this.state.amiibo} getCharacter={this.getCharacter} />
-          <Profile character={this.state.character}/>
+          <div className="Selection">
+            <h1>Choose a Character!</h1>
+            <Selection amiibo={this.state.amiibo} getCharacter={this.getCharacter} />
+            <Favorites favorites={this.state.favorites} deleteFavorite={this.deleteFavorite}/>
+          </div>
+          <Profile character={this.state.character} addFavorite={this.addFavorite}/>
         </div>
       </div>
     );

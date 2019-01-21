@@ -1,3 +1,31 @@
 .Profile {
-  width: 50vh;
+  width: 65vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.Profile img {
+  width: 250px;
+  height: 300px;
+}
+
+.Profile h2 {
+  font-family: 'Francois One', sans-serif;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.FavoriteButton {
+  background: white;
+  border: 3px solid black;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-family: 'Francois One', sans-serif;
+}
+
+.FavoriteButton:hover {
+  background: #2A86FF;
+  color: white;
 }

@@ -26,4 +26,12 @@ time, mark, audio, video {
 .MainApp {
 	display: flex;
 	justify-content: space-evenly;
+	padding-top: 1rem;
+}
+
+.App h1 {
+	text-transform: uppercase;
+	font-family: 'Francois One', sans-serif;
+	text-align: center;
+	font-size: 2rem;
 }
