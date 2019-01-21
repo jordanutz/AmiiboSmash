@@ -15,7 +15,7 @@ class App extends Component {
       character: {},
       favorites: [],
       filter: '',
-      toggleFavorites: false
+      toggleFavorites: false,
     }
   }
 
@@ -53,6 +53,7 @@ class App extends Component {
       // console.log(res.data)
       this.setState({
         character: res.data[0],
+        toggleFavorites: false,
       })
     })
   }
@@ -100,6 +101,16 @@ class App extends Component {
     })
   }
 
+  checkFavorite = (array, name) => {
+    let favoriteButton = true;
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].name === name) {
+        favoriteButton = false
+      }
+    }
+    return favoriteButton
+  }
+
   render() {
 
     // console.log(this.state.character)
@@ -114,8 +125,8 @@ class App extends Component {
 
     <Profile character={this.state.character}
       addFavorite={this.addFavorite}
-      favorites={this.state.favorites}/>
-
+      favorites={this.state.favorites}
+      checkFavorite={this.checkFavorite}/>
 
     return (
       <div className="App">
