@@ -16,12 +16,16 @@ updateAmiibo = (array, id, name) => {
 }
 
 updateFavorite = (array, id, name) => {
+  let arr = []
   for (let i = 0; i < array.length; i++) {
+    console.log(array[i])
     if (array[i].id === id) {
-      array[i] = name
+      array[i].name = name
+      arr.push(array[i])
     }
   }
-  return array
+  console.log(arr)
+  return arr
 }
 
 module.exports = {

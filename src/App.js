@@ -79,10 +79,10 @@ class App extends Component {
   editFavorite = (id, name) => {
     // console.log(id, name)
     axios.put(`/api/favorite/${id}`, {name}).then(res => {
-      // console.log(res.data)
+      console.log(res.data)
       this.setState({
         favorites: res.data.updatedFavorite,
-        amiibo: res.data.updatedAmiibo
+        amiibo: res.data.updatedAmiibo,
       })
     })
   }
@@ -104,7 +104,7 @@ class App extends Component {
     // console.log(this.state.character)
     // console.log(this.state.favorites)
     // console.log(this.state.favorites.length)
-    console.log(this.state.toggleFavorites)
+    // console.log(this.state.toggleFavorites)
 
   let viewFavorites = this.state.toggleFavorites ?
     <Favorites favorites={this.state.favorites}
@@ -112,7 +112,8 @@ class App extends Component {
       editFavorite={this.editFavorite}/> :
 
     <Profile character={this.state.character}
-      addFavorite={this.addFavorite}/>
+      addFavorite={this.addFavorite}
+      favorites={this.state.favorites}/>
 
 
     return (

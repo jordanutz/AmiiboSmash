@@ -22,6 +22,11 @@ class Favorite extends Component {
     })
   }
 
+  handleSubmit = () => {
+    this.props.editFavorite(this.props.id, this.state.name)
+    this.toggleEdit()
+  }
+
   render () {
 
     // console.log(this.props)
@@ -29,7 +34,8 @@ class Favorite extends Component {
     let editButton = this.state.editName ?
     <div className="EditDisplay">
       <input onChange={this.handleName}/>
-      <button onClick={() => this.props.editFavorite(this.props.id, this.state.name)}>Submit</button>
+      <button value={this.state.editName}
+        onClick={() => this.handleSubmit()}>Submit</button>
     </div> :
     <button onClick={this.toggleEdit}>Edit</button>
 
