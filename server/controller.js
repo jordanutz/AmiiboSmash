@@ -22,6 +22,8 @@ updateFavorite = (array, id, name) => {
     if (array[i].id === id) {
       array[i].name = name
       arr.push(array[i])
+    } else {
+      arr.push(array[i])
     }
   }
   console.log(arr)

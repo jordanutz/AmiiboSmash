@@ -71,7 +71,8 @@ class App extends Component {
     axios.delete(`/api/favorite/${id}`).then(res => {
       // console.log(res)
       this.setState({
-        favorites: res.data
+        favorites: res.data,
+        toggleFavorites: false
       })
     })
   }
