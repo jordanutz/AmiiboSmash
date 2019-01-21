@@ -3,20 +3,20 @@ import './Favorites.css'
 import Favorite from '../Favorite/Favorite'
 
 const Favorites = (props) => {
-  console.log(props.favorites)
+  // console.log(props.favorites)
 
   let displayedFavorites = props.favorites.map( (favorite, index) => {
-    return <Favorite key={index} {...favorite} deleteFavorite={props.deleteFavorite}/>
+    return <Favorite key={index} {...favorite} deleteFavorite={props.deleteFavorite} editFavorite={props.editFavorite}/>
   })
 
-  console.log(displayedFavorites)
+  // console.log(displayedFavorites)
 
   return (
-    <div>
-
-      {displayedFavorites}
-
-
+    <div className="Favorites">
+      <h1>Favorites</h1>
+      <div className="FavoritesSelection">
+        {displayedFavorites}
+      </div>
     </div>
   )
 }

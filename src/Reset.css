@@ -21,6 +21,7 @@ time, mark, audio, video {
 
 .App {
 	min-height: 100vh;
+	font-family: 'Francois One', sans-serif;
 }
 
 .MainApp {
@@ -34,4 +35,11 @@ time, mark, audio, video {
 	font-family: 'Francois One', sans-serif;
 	text-align: center;
 	font-size: 2rem;
+}
+
+button {
+	background: white;
+	font-family: 'Francois One', sans-serif;
+	border: 2px solid black;
+	cursor: pointer;
 }

@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import './Selection.css'
 import axios from 'axios'
 import Amiibo from '../Amiibo/Amiibo'
-import Filter from '../Filter/Filter'
-
 
 class Selection extends Component {
   constructor() {
@@ -20,7 +18,7 @@ class Selection extends Component {
   }
 
   render () {
-    console.log(this.props)
+    // console.log(this.props)
 
     let filterAmiibo = this.props.amiibo.filter(character => {
       return character.name.toLowerCase().indexOf(this.state.filterInput) !== -1;
@@ -30,9 +28,17 @@ class Selection extends Component {
       return <Amiibo key={index} index={index} {...character} getCharacter={this.props.getCharacter}/>
     })
 
+    let favoritesButton = this.props.favorites.length > 0 &&
+    <button onClick={() => this.props.toggleFavorites()}>View Favorites ({this.props.favorites.length})</button>
+
     return (
-      <div>
-        <span>Filter by Name:</span><input onChange={this.handleInput}/>
+      <div className="Selection">
+        <div className="SelectionTools">
+          <div className="SelectionFilter">
+            <span>Filter by Name:</span><input onChange={this.handleInput}/>
+          </div>
+          {favoritesButton}
+        </div>
         <aside>
           {displayedAmiibo}
         </aside>

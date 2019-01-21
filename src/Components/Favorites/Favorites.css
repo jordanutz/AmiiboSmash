@@ -1,0 +1,4 @@
+.FavoritesSelection {
+  display: flex;
+  flex-wrap: wrap;
+}

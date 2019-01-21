@@ -1,10 +1,31 @@
 .SingleFavorite {
   display: flex;
   flex-direction: column;
-  background: blue;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  margin: 1rem;
+  border: 2px solid black;
+  width: 200px;
+  height: 200px;
+  position: relative;
 }
 
 .SingleFavorite img {
-  width: 5.5rem;
-  height: 6rem;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 1rem;
+  top: 10px;
+}
+
+.FavoritesButton {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.EditDisplay {
+  display: flex;
+  flex-direction: column;
 }

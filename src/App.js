@@ -14,7 +14,8 @@ class App extends Component {
       amiibo: [],
       character: {},
       favorites: [],
-      filter: ''
+      filter: '',
+      toggleFavorites: false
     }
   }
 
@@ -22,7 +23,7 @@ class App extends Component {
     axios.get('http://www.amiiboapi.com/api/amiibo/').then(res => {
       let finalAmiibo = this.filterAmiibo(res)
       axios.post('/api/amiibo', {finalAmiibo}).then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.setState({
           amiibo: res.data
         })
@@ -49,9 +50,9 @@ class App extends Component {
   getCharacter = (id) => {
     console.log(id)
     axios.get(`/api/amiibo/${id}`).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       this.setState({
-        character: res.data[0]
+        character: res.data[0],
       })
     })
   }
@@ -59,19 +60,29 @@ class App extends Component {
   addFavorite = (favorite) => {
     console.log(favorite)
     axios.post('/api/favorite', favorite).then(res => {
-      // console.log(res.data)
+      this.setState({
+        favorites: res.data,
+      })
+    })
+  }
+
+  deleteFavorite = (id) => {
+    // console.log(id)
+    axios.delete(`/api/favorite/${id}`).then(res => {
+      // console.log(res)
       this.setState({
         favorites: res.data
       })
     })
   }
 
-  deleteFavorite = (id) => {
-    console.log(id)
-    axios.delete(`/api/favorite/${id}`).then(res => {
-      console.log(res)
+  editFavorite = (id, name) => {
+    // console.log(id, name)
+    axios.put(`/api/favorite/${id}`, {name}).then(res => {
+      // console.log(res.data)
       this.setState({
-        favorites: res.data
+        favorites: res.data.updatedFavorite,
+        amiibo: res.data.updatedAmiibo
       })
     })
   }
@@ -82,10 +93,26 @@ class App extends Component {
     })
   }
 
+  toggleFavorites = () => {
+    this.setState({
+      toggleFavorites: !this.state.toggleFavorites
+    })
+  }
+
   render() {
-    //
+
     // console.log(this.state.character)
     // console.log(this.state.favorites)
+    // console.log(this.state.favorites.length)
+    console.log(this.state.toggleFavorites)
+
+  let viewFavorites = this.state.toggleFavorites ?
+    <Favorites favorites={this.state.favorites}
+      deleteFavorite={this.deleteFavorite}
+      editFavorite={this.editFavorite}/> :
+
+    <Profile character={this.state.character}
+      addFavorite={this.addFavorite}/>
 
 
     return (
@@ -94,10 +121,14 @@ class App extends Component {
         <div className="MainApp">
           <div className="Selection">
             <h1>Choose a Character!</h1>
-            <Selection amiibo={this.state.amiibo} getCharacter={this.getCharacter} />
-            <Favorites favorites={this.state.favorites} deleteFavorite={this.deleteFavorite}/>
+            <Selection amiibo={this.state.amiibo}
+              getCharacter={this.getCharacter}
+              toggleFavorites={this.toggleFavorites}
+              favorites={this.state.favorites}/>
           </div>
-          <Profile character={this.state.character} addFavorite={this.addFavorite}/>
+          <div>
+            {viewFavorites}
+          </div>
         </div>
       </div>
     );
