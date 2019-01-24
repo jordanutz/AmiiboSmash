@@ -20,22 +20,26 @@ class Selection extends Component {
   render () {
     // console.log(this.props)
 
-    let filterAmiibo = this.props.amiibo.filter(character => {
-      return character.name.toLowerCase().indexOf(this.state.filterInput) !== -1;
+    const {amiibo, getCharacter, favorites, toggleFavorites} = this.props
+    const {filterInput} = this.state
+    const {handleInput} = this
+
+    let filterAmiibo = amiibo.filter(character => {
+      return character.name.toLowerCase().indexOf(filterInput) !== -1;
     })
 
     let displayedAmiibo = filterAmiibo.map( (character, index) => {
-      return <Amiibo key={index} index={index} {...character} getCharacter={this.props.getCharacter}/>
+      return <Amiibo key={index} index={index} {...character} getCharacter={getCharacter}/>
     })
 
-    let favoritesButton = this.props.favorites.length > 0 &&
-    <button onClick={() => this.props.toggleFavorites()}>View Favorites ({this.props.favorites.length})</button>
+    let favoritesButton = favorites.length > 0 &&
+    <button onClick={() => toggleFavorites()}>View Favorites ({favorites.length})</button>
 
     return (
       <div className="Selection">
         <div className="SelectionTools">
           <div className="SelectionFilter">
-            <span>Filter by Name:</span><input onChange={this.handleInput}/>
+            <span>Filter by Name:</span><input onChange={handleInput}/>
           </div>
           {favoritesButton}
         </div>

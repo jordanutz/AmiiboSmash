@@ -13,6 +13,10 @@
   border: 2px solid black;
 }
 
+.Amiibo:hover h1 {
+  color: black;
+}
+
 .Amiibo h1 {
   position: absolute;
   text-transform: uppercase;
@@ -29,13 +33,4 @@
   height: 6rem;
   position: absolute;
   top: 3px;
-}
-
-.Amiibo:hover {
-  background: blue;
-  color: white;
-}
-
-.Amiibo:focus {
-  background: red;
 }

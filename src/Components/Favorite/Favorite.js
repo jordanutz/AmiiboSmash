@@ -31,21 +31,25 @@ class Favorite extends Component {
 
     // console.log(this.props)
 
-    let editButton = this.state.editName ?
+    const {editName} = this.state
+    const {handleName, handleSubmit, toggleEdit} = this
+    const {image, name, deleteFavorite, id} = this.props
+
+    let editButton = editName ?
     <div className="EditDisplay">
-      <input onChange={this.handleName}/>
-      <button value={this.state.editName}
-        onClick={() => this.handleSubmit()}>Submit</button>
+      <input onChange={handleName}/>
+      <button value={editName}
+        onClick={() => handleSubmit()}>Submit</button>
     </div> :
-    <button onClick={this.toggleEdit}>Edit</button>
+    <button onClick={toggleEdit}>Edit</button>
 
     return (
       <div className="SingleFavorite">
-        <img src={this.props.image} />
-        <h2>{this.props.name}</h2>
+        <img src={image} />
+        <h2>{name}</h2>
         <div className="FavoritesButton">
           {editButton}
-          <button onClick={() => this.props.deleteFavorite(this.props.id)}>Delete</button>
+          <button onClick={() => deleteFavorite(id)}>Delete</button>
         </div>
       </div>
     )

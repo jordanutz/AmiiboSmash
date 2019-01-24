@@ -42,6 +42,8 @@ class App extends Component {
       && element.name !== "Bayonetta (Player 2)"
       && element.name !== "Mega Man (Gold Edition)"
       && element.name !== "R.O.B (Famicom)"
+      && element.name !== 'Bayonetta'
+      && element.name !== 'Ryu'
 
     })
     return filteredAmiibo
@@ -118,15 +120,18 @@ class App extends Component {
     // console.log(this.state.favorites.length)
     // console.log(this.state.toggleFavorites)
 
-  let viewFavorites = this.state.toggleFavorites ?
-    <Favorites favorites={this.state.favorites}
-      deleteFavorite={this.deleteFavorite}
-      editFavorite={this.editFavorite}/> :
+    const {toggleFavorites, favorites, character, amiibo} = this.state
+    const {deleteFavorite, editFavorite, addFavorite, checkFavorite, getCharacter} = this
 
-    <Profile character={this.state.character}
-      addFavorite={this.addFavorite}
-      favorites={this.state.favorites}
-      checkFavorite={this.checkFavorite}/>
+  let viewFavorites = toggleFavorites ?
+    <Favorites favorites={favorites}
+      deleteFavorite={deleteFavorite}
+      editFavorite={editFavorite}/> :
+
+    <Profile character={character}
+      addFavorite={addFavorite}
+      favorites={favorites}
+      checkFavorite={checkFavorite}/>
 
     return (
       <div className="App">
@@ -134,10 +139,10 @@ class App extends Component {
         <div className="MainApp">
           <div className="Selection">
             <h1>Choose a Character!</h1>
-            <Selection amiibo={this.state.amiibo}
-              getCharacter={this.getCharacter}
+            <Selection amiibo={amiibo}
+              getCharacter={getCharacter}
               toggleFavorites={this.toggleFavorites}
-              favorites={this.state.favorites}/>
+              favorites={favorites}/>
           </div>
           <div>
             {viewFavorites}
